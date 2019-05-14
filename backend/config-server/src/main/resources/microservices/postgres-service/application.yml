@@ -1,0 +1,35 @@
+spring:
+
+  datasource:
+
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://172.18.0.4:5432/metrikano_db
+    username: metrikano_user
+    password: metrikano_pass
+
+    tomcat:
+
+      test-on-borrow: true
+      validation-query: SELECT 1
+
+  liquibase:
+    change-log: classpath:/migrations/changelog-master.yml
+    database-change-log-lock-table: database_change_log_locking
+    database-change-log-table: database_change_log
+
+  kafka:
+  
+    consumer:
+
+      bootstrap-servers: ["172.18.0.5:29092"]
+      offset-type: latest
+      topics: ["user-record-topic", "user-link-topic"]
+      group-id: "postgres-group"
+
+jwt:
+  
+  properties:
+
+    header: Authorization
+    secret-key: fnreskjdfn4p3ithn3q[04tfraf
+    expires-at: 600   

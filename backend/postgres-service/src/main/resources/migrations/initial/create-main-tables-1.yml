@@ -1,0 +1,97 @@
+databaseChangeLog:
+
+  - preConditions:
+
+      - runningAs:
+
+          username: metrikano_user
+
+  - changeSet:
+
+      id: 1
+      author: andrey_romanov
+
+      changes:
+
+        - createTable:
+
+            tableName: user_with_link
+
+            columns:
+
+              - column:
+
+                  name: id
+
+                  type: int
+
+                  autoIncrement: true
+
+                  constraints:
+
+                    primaryKey: true
+
+                    nullable: false
+
+              - column:
+
+                  name: username
+
+                  type: VARCHAR(50)
+
+              - column:
+
+                  name: link
+
+                  type: VARCHAR(50)
+
+              - column:
+
+                  name: link_type
+
+                  type: VARCHAR(50)
+
+  - changeSet:
+
+      id: 2
+      author: andrey_romanov
+
+      changes:
+
+        - createTable:
+
+            tableName: user_with_record
+
+            columns:
+
+              - column:
+
+                  name: id
+
+                  type: int
+
+                  autoIncrement: true
+
+                  constraints:
+
+                    primaryKey: true
+
+                    nullable: false
+
+              - column:
+
+                  name: username
+
+                  type: VARCHAR(50)
+
+              - column:
+
+                  name: record_id
+
+                  type: VARCHAR(50)
+
+              - column:
+
+                  name: record_type
+
+                  type: VARCHAR(50)

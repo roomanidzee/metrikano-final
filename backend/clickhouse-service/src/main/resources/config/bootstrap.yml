@@ -1,0 +1,21 @@
+server:
+  port: 8084
+  servlet:
+    context-path: /api/users-vk
+
+logging:
+
+  config: classpath:logging/logback-spring.xml
+
+spring:
+  application:
+    name: clickhouse-service
+
+  cloud:
+
+    config:
+
+      fail-fast: true
+      uri: http://localhost:8080
+      username: config-user
+      password: config-password

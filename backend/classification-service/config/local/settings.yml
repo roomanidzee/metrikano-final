@@ -1,0 +1,73 @@
+development:
+
+  debug: true
+
+  host: 127.0.0.1
+
+  port: 5001
+
+  use_reloader: false
+
+  prefix: /api
+
+  docs: /api/docs
+
+  vk:
+
+    access_key: ваш_токен
+    api_version: 5.89
+    lang: ru
+
+  error_include_message: false
+
+  logs:
+
+    directory: logs
+    format: '%(asctime)s [%(threadName)-12.12s] [in %(pathname)s:%(lineno)d in %(funcName)s] [%(levelname)-5.5s]  %(message)s'
+
+  consul:
+
+    name: classification-service
+    interval: 10s
+    tags: ['classification-service', ]
+    host: 172.18.0.2
+    port: 5001
+    httpcheck: http://localhost:5001/api/consul/health_check
+
+  kafka:
+
+    host: 172.18.0.5
+    port: 29092
+    influx_topics: ["influx-group-topic", "influx-classify-topic"]
+    clickhouse_topics: ["clickhouse-user-topic", "clickhouse-classify-topic"]
+    postgres_topics: ["user-link-topic"]
+    linger_ms: 10
+
+  management:
+
+    influx:
+
+      load_url: http://localhost:8081/api/groups-vk/data
+      directory_path: files/groups/data
+      model_store_path: files/groups/model
+
+    clickhouse:
+    
+      load_url: http://localhost:8084/api/users-vk/data
+      directory_path: files/users/data
+      model_store_path: files/users/model  
+
+  schedulers:
+
+    produce_data: false
+
+    influx:
+
+      records_count: 10
+      file_path: files/groups/origin/group_ids.txt
+      interval: 10
+
+    clickhouse:
+
+      file_path: files/users/origin/user_ids.txt
+      interval: 10

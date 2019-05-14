@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: metrikano_auth_user
+
+  - include:
+      file: /migrations/initial/create-main-tables-changelog-1.yml

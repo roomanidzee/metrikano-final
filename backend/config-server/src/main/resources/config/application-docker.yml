@@ -1,0 +1,46 @@
+spring:
+
+  cloud:
+
+    config:
+
+      server:
+
+        native:
+
+          search-locations: classpath:microservices/{application}
+
+    consul:
+
+      config:
+
+        enabled: true
+        prefix: config
+
+      discovery:
+
+        register: true
+
+    service-registry:
+
+      auto-registration:
+
+        enabled: true
+
+  profiles:
+
+    active: native,docker
+
+    security:
+
+      basic:
+
+        enabled: true
+
+        user:
+
+          name: config-user
+
+          password: config-password
+
+          roles: SYSTEM

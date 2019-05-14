@@ -1,0 +1,21 @@
+server:
+  port: 8087
+  servlet:
+    context-path: /api/groups-vk
+
+logging:
+
+  config: classpath:logging/logback-spring.xml
+
+spring:
+  application:
+    name: influx-service
+
+  cloud:
+
+    config:
+
+      fail-fast: true
+      uri: http://localhost:8080
+      username: config-user
+      password: config-password  

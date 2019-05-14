@@ -1,0 +1,31 @@
+spring:
+
+  kafka:
+
+    producer:
+
+      bootstrap-servers: ["172.18.0.5:29092"]
+      topic: user-record-topic
+
+    consumer:
+
+      bootstrap-servers: ["172.18.0.5:29092"]
+      offset-type: latest
+      topics: ["clickhouse-user-topic", "clickhouse-classify-topic"]
+      group-id: "clickhouse-group"
+
+  clickhouse:
+  
+    host: 172.18.0.6
+    port: 8123
+    database: metrikano_db
+    user: default
+    password: ""
+
+jwt:
+  
+  properties:
+
+    header: Authorization
+    secret-key: fnreskjdfn4p3ithn3q[04tfraf
+    expires-at: 600         

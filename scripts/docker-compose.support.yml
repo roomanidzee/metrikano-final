@@ -1,0 +1,159 @@
+version: '2.4'
+
+services:
+    
+    consul-service:
+
+        image: 'consul:1.4.2'
+
+        networks:
+
+            - metrikano-network
+
+        volumes:
+            - './environments/consul/volume/consul-data:/consul/data'
+
+        restart: on-failure    
+
+        ports:
+            - '8400:8400'
+            - '8500:8500'
+            - '8600:8600'
+            - '8600:8600/udp'
+
+        command: 'agent -server -data-dir="/consul/data" -bootstrap -client="0.0.0.0" -advertise="127.0.0.1" -ui'
+
+        mem_limit: 512m
+
+    influx-service:
+
+        image: 'influxdb:1.6.6-alpine'
+
+        networks:
+
+            - metrikano-network
+
+        restart: on-failure    
+
+        depends_on:
+            - kafka-service
+
+        ports:
+            - '8083:8083'
+            - '8086:8086'
+            - '8090:8090'
+
+        env_file:
+            - environments/influx/influx.env
+
+        mem_limit: 512m
+
+    zookeeper-service:
+
+        image: 'confluentinc/cp-zookeeper:5.0.2'
+
+        networks:
+
+            - metrikano-network
+
+        restart: on-failure
+
+        env_file:
+
+            - environments/zookeeper/zookeeper.env
+
+        container_name: zookeeper-service  
+
+        mem_limit: 256m
+
+    kafka-service:
+
+        image: 'confluentinc/cp-kafka:5.0.2'
+
+        networks:
+
+            - metrikano-network
+
+        restart: on-failure    
+
+        depends_on:
+            - zookeeper-service
+
+        ports:
+            - '9092:9092'
+            - '29092:29092' 
+
+        env_file:
+            - environments/kafka/kafka.env
+
+        mem_limit: 256m
+
+    kafka-topics-init:
+    
+        image: 'metrikano/kafka-topics-init:latest'
+
+        build:
+          
+          context: environments/kafka/kafka-topics
+          dockerfile: Dockerfile
+
+        networks:
+
+            - metrikano-network
+
+        restart: on-failure    
+
+        depends_on:
+            - kafka-service
+
+        container_name: kafka-topics-init                     
+
+    clickhouse-service:
+
+        image: 'yandex/clickhouse-server:19.3.7'
+
+        networks:
+
+            - metrikano-network
+
+        restart: on-failure    
+
+        depends_on:
+
+            - kafka-service
+
+        volumes:
+            
+            - './environments/clickhouse/volume/ch-data:/var/lib/clickhouse'
+            - './environments/clickhouse/sql:/docker-entrypoint-initdb.d'    
+
+        ports:
+            
+            - '8123:8123'
+
+        mem_limit: 1g
+
+    postgresql-db:
+    
+        image: 'postgres:10.7-alpine'
+
+        networks:
+
+            - metrikano-network
+
+        restart: on-failure
+
+        volumes:
+        
+            - './environments/postgresql/config:/docker-entrypoint-initdb.d'
+
+        ports:
+            - '5432:5432'
+
+        mem_limit: 512m                                  
+
+networks:
+    
+    metrikano-network:
+
+        name: metrikano-net

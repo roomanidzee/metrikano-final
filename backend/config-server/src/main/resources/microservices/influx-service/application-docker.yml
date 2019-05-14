@@ -1,0 +1,22 @@
+spring:
+
+  influxdb:
+    
+    url: http://influx-service:8086
+    username: metrics_user
+    password: metrics_pass
+    database: groups_db
+    retention-policy: autogen
+    connect-timeout: 10
+    read-timeout: 30
+    write-timeout: 10
+    gzip: true
+
+  kafka:
+
+    consumer:
+
+      bootstrap-servers: ["kafka-service:9092"]
+      offset-type: earliest
+      topics: ["influx-group-topic", "influx-classify-topic"]
+      group-id: "influx-group"

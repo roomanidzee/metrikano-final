@@ -1,0 +1,21 @@
+server:
+  port: ${PORT}
+  servlet:
+    context-path: /api
+
+logging:
+
+  config: classpath:logging/logback-spring.xml
+
+spring:
+  application:
+    name: auth-service
+
+  cloud:
+
+    config:
+
+      fail-fast: true
+      uri: http://config-server:8080
+      username: config-user
+      password: config-password

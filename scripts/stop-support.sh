@@ -1,0 +1,1 @@
+docker-compose -f scripts/docker-compose.support.yml down

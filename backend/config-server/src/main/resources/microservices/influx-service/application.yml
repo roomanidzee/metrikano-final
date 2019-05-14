@@ -1,0 +1,35 @@
+spring:
+
+  influxdb:
+    
+    url: http://172.18.0.8:8086
+    username: metrics_user
+    password: metrics_pass
+    database: groups_db
+    retention-policy: autogen
+    connect-timeout: 10
+    read-timeout: 30
+    write-timeout: 10
+    gzip: true
+
+  kafka:
+
+    producer:
+
+      bootstrap-servers: ["172.18.0.5:29092"]
+      topic: user-record-topic
+
+    consumer:
+
+      bootstrap-servers: ["172.18.0.5:29092"]
+      offset-type: latest
+      topics: ["influx-group-topic", "influx-classify-topic"]
+      group-id: "influx-group"
+
+jwt:
+  
+  properties:
+
+    header: Authorization
+    secret-key: fnreskjdfn4p3ithn3q[04tfraf
+    expires-at: 600 

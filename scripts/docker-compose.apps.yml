@@ -1,0 +1,213 @@
+version: '2.4'
+
+services:
+
+    classification-service:
+
+      image: 'metrikano/classification-service:latest'
+
+      build:
+
+        context: ../backend/classification-service
+        dockerfile: Dockerfile
+
+      networks:
+
+        - metrikano-network
+
+      restart: on-failure 
+
+      depends_on:
+
+        - consul-service
+        - kafka-service
+
+      ports:
+      
+        - '5001:5001'
+
+      env_file:
+      
+        - environments/config-microservices/classification-service.env
+
+    angular-service:
+    
+      image: 'metrikano/angular-service:latest'
+
+      build:
+
+        context: ../frontend/metrikano-frontend
+        dockerfile: docker/Dockerfile
+
+      networks:
+
+        - metrikano-network
+
+      restart: on-failure
+      
+      ports:
+
+        - '3000:80'          
+
+    config-server:
+
+      image: 'metrikano/config-server:latest'
+
+      build:
+
+        context: ../backend/config-server
+        dockerfile: src/main/docker/Dockerfile
+
+      networks:
+
+        - metrikano-network
+
+      restart: on-failure 
+
+      depends_on:
+
+        - consul-service
+
+      ports:
+      
+        - '8080:8080'
+
+      env_file:
+      
+        - environments/config-microservices/config-server.env  
+
+      mem_limit: 200m
+      
+    groups-vk-service:
+    
+      image: 'metrikano/influx-service:latest'
+
+      build:
+
+        context: ../backend/influx-service
+        dockerfile: src/main/docker/Dockerfile
+
+      networks:
+
+        - metrikano-network
+
+      restart: on-failure 
+
+      depends_on:
+
+        - config-server
+        - gateway-service
+        - influx-service
+        - kafka-service
+
+      links:
+      
+        - config-server
+        - gateway-service
+
+      env_file: 
+        
+        - environments/influx/influx-service.env
+
+      mem_limit: 200m
+      
+    users-vk-service:
+    
+      image: 'metrikano/clickhouse-service:latest'
+
+      build:
+
+        context: ../backend/clickhouse-service
+        dockerfile: src/main/docker/Dockerfile
+
+      networks:
+
+        - metrikano-network
+
+      restart: on-failure 
+
+      depends_on:
+
+        - config-server
+        - gateway-service
+        - clickhouse-service
+        - kafka-service
+
+      links:
+      
+        - config-server
+        - gateway-service 
+
+      env_file:
+      
+        - environments/clickhouse/clickhouse-service.env
+
+      mem_limit: 200m
+
+    postgresql-service:
+
+      image: 'metrikano/postgresql-service:latest'
+
+      build:
+
+        context: ../backend/postgres-service
+        dockerfile: src/main/docker/Dockerfile
+
+      networks:
+      
+        - metrikano-network
+
+      restart: on-failure
+      
+      depends_on:
+
+        - config-server
+        - gateway-service
+        - clickhouse-service
+        - kafka-service
+        - postgresql-db
+
+      links:
+      
+        - config-server
+        - gateway-service
+        
+      env_file:
+      
+        - environments/postgresql/postgresql-service.env
+
+      mem_limit: 200m
+
+    auth-service:
+
+      image: 'metrikano/auth-service:latest'
+
+      build:
+
+        context: ../backend/auth-service
+        dockerfile: src/main/docker/Dockerfile
+
+      networks:
+      
+        - metrikano-network
+
+      restart: on-failure
+      
+      depends_on:
+
+        - config-server
+        - gateway-service
+        - clickhouse-service
+        - kafka-service
+        - postgresql-db
+
+      links:
+      
+        - config-server
+        - gateway-service
+        
+      env_file:
+      
+        - environments/postgresql/postgresql-auth.env
+
+      mem_limit: 200m                                                    

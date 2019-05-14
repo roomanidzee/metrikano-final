@@ -1,0 +1,35 @@
+{
+  "groups": [
+    {
+      "name": "spring.kafka.consumer",
+      "type": "com.romanidze.metrikano.influxservice.config.kafka.consumer.KafkaConsumerProperties",
+      "sourceType": "com.romanidze.metrikano.influxservice.config.kafka.consumer.KafkaConsumerProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.kafka.consumer.bootstrap-servers",
+      "type": "java.util.List<java.lang.String>",
+      "description": "Сервера Kafka (узлы).",
+      "sourceType": "com.romanidze.metrikano.influxservice.config.kafka.consumer.KafkaConsumerProperties"
+    },
+    {
+      "name": "spring.kafka.consumer.topics",
+      "type": "java.util.List<java.lang.String>",
+      "description": "Имя топиков для подписки.",
+      "sourceType": "com.romanidze.metrikano.influxservice.config.kafka.consumer.KafkaConsumerProperties"
+    },
+    {
+      "name": "spring.kafka.consumer.offset-type",
+      "type": "java.lang.String",
+      "description": "Тип оффсета для получения данных.",
+      "sourceType": "com.romanidze.metrikano.influxservice.config.kafka.consumer.KafkaConsumerProperties"
+    },
+    {
+      "name": "spring.kafka.consumer.group-id",
+      "type": "java.lang.String",
+      "description": "Идентификатор группы для консьюмера.",
+      "sourceType": "com.romanidze.metrikano.influxservice.config.kafka.consumer.KafkaConsumerProperties"
+    }
+  ]
+}

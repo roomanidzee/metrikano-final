@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: metrikano_user
+
+  - include:
+      file: /migrations/initial/changelog-initial.yml

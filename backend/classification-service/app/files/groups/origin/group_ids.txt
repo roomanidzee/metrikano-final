@@ -1,0 +1,12 @@
+-114106783 local
+-80990765 local
+-50512447 aggregate
+-52651103 aggregate
+-46074357 games
+-39443385 games
+-103468841 local
+-84896692 local
+-118066749 aggregate
+-118023313 aggregate
+-63577668 games
+-116718541 games

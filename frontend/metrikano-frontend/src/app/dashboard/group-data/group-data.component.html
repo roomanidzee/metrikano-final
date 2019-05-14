@@ -1,0 +1,61 @@
+<div>
+  <br>
+  <div class="container">
+    <div class="container">
+      <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row"  fxLayoutAlign="space-around center" class="content">
+        <div class="blocks" style="text-align:center">
+          <mat-form-field>
+            <input matInput placeholder="Ссылка на группу ВК" name="userData.link" [(ngModel)]="groupData.link"/>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" style="text-align:center" (click)="submit(groupData)">
+            <mat-icon>add</mat-icon> Добавить нового пользователя из ВК
+          </button>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="container">
+      <div fxLayout="row" fxLayoutAlign="center center" class="content">
+        <mat-card class="card" >
+          <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+            <h3 style="text-align:center">Информация о полученных постах</h3>
+          </mat-card-title>
+          <mat-card-content>
+            <div class="mat-elevation-z8">
+              <mat-table #table [dataSource]="dataSource">
+                <ng-container matColumnDef="creation_time">
+                  <mat-header-cell *matHeaderCellDef>Дата создания</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.creationTime }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="group_id">
+                  <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.groupID}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="post_type">
+                  <mat-header-cell *matHeaderCellDef>Тип записи</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.postType}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="post_text">
+                  <mat-header-cell *matHeaderCellDef>Текст записи</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.postText}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="delete">
+                  <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <a
+                      type="button">
+                      <mat-icon class="icon">delete</mat-icon>
+                    </a>
+                  </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+{
+  "groups": [
+    {
+      "name": "spring.kafka.consumer",
+      "type": "com.romanidze.metrikano.clickhouseservice.config.kafka.consumer.KafkaConsumerProperties",
+      "sourceType": "com.romanidze.metrikano.clickhouseservice.config.kafka.consumer.KafkaConsumerProperties"
+    },
+    {
+      "name": "spring.kafka.producer",
+      "type": "com.romanidze.metrikano.clickhouseservice.config.kafka.producer.KafkaProducerProperties",
+      "sourceType": "com.romanidze.metrikano.clickhouseservice.config.kafka.producer.KafkaProducerProperties"
+    },
+    {
+      "name": "spring.clickhouse",
+      "type": "com.romanidze.metrikano.clickhouseservice.config.clickhouse.ClickHouseSpringProperties",
+      "sourceType": "com.romanidze.metrikano.clickhouseservice.config.clickhouse.ClickHouseSpringProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.kafka.consumer.bootstrap-servers",
+      "type": "java.util.List<java.lang.String>",
+      "description": "Сервера Kafka (узлы).",
+      "sourceType": "com.romanidze.metrikano.clickhouseservice.config.kafka.consumer.KafkaConsumerProperties"
+    },
+    {
+      "name": "spring.kafka.consumer.topic-name",
+      "type": "java.util.List<java.lang.String>",
+      "description": "Имя топиков для подписки.",
+      "sourceType": "com.romanidze.metrikano.clickhouseservice.config.kafka.consumer.KafkaConsumerProperties"
+    },
+    {
+      "name": "spring.kafka.consumer.offset-type",
+      "type": "java.lang.String",
+      "description": "Тип оффсета для получения данных.",
+      "sourceType": "com.romanidze.metrikano.clickhouseservice.config.kafka.consumer.KafkaConsumerProperties"
+    },
+    {
+      "name": "spring.kafka.consumer.group-id",
+      "type": "java.lang.String",
+      "description": "Идентификатор группы для консьюмера.",
+      "sourceType": "com.romanidze.metrikano.clickhouseservice.config.kafka.consumer.KafkaConsumerProperties"
+    },
+    {
+      "name": "spring.kafka.producer.bootstrap-servers",
+      "type": "java.util.List<java.lang.String>",
+      "description": "Сервера Kafka(узлы).",
+      "sourceType": "com.romanidze.metrikano.clickhouseservice.config.kafka.producer.KafkaProducerProperties"
+    },
+    {
+      "name": "spring.kafka.producer.topic",
+      "type": "java.lang.String",
+      "description": "Имя топика для отправки сообщения.",
+      "sourceType": "com.romanidze.metrikano.clickhouseservice.config.kafka.producer.KafkaProducerProperties"
+    },
+    {
+      "name": "spring.clickhouse.host",
+      "type": "java.lang.String",
+      "description": "Адрес для подключения к БД.",
+      "sourceType": "com.romanidze.metrikano.clickhouseservice.config.clickhouse.ClickHouseSpringProperties"
+    },
+    {
+      "name": "spring.clickhouse.port",
+      "type": "java.lang.Integer",
+      "description": "Порт для подключения к БД.",
+      "sourceType": "com.romanidze.metrikano.clickhouseservice.config.clickhouse.ClickHouseSpringProperties"
+    },
+    {
+      "name": "spring.clickhouse.database",
+      "type": "java.lang.String",
+      "description": "Имя БД для подключения.",
+      "sourceType": "com.romanidze.metrikano.clickhouseservice.config.clickhouse.ClickHouseSpringProperties"
+    },
+    {
+      "name": "spring.clickhouse.user",
+      "type": "java.lang.String",
+      "description": "Имя пользователя.",
+      "sourceType": "com.romanidze.metrikano.clickhouseservice.config.clickhouse.ClickHouseSpringProperties"
+    },
+    {
+      "name": "spring.clickhouse.password",
+      "type": "java.lang.String",
+      "description": "Пароль пользователя.",
+      "sourceType": "com.romanidze.metrikano.clickhouseservice.config.clickhouse.ClickHouseSpringProperties"
+    }
+  ]
+}

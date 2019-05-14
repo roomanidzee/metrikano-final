@@ -1,0 +1,20 @@
+server:
+  port: ${PORT}
+  servlet:
+    context-path: /api
+
+logging:
+
+  config: classpath:logging/logback-spring.xml
+
+spring:
+
+  application:
+    name: config-server
+
+  cloud:
+
+    consul:
+
+      host: consul-service
+      port: 8500
